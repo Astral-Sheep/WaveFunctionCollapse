@@ -1,0 +1,98 @@
+{
+	"0": {
+		"NegX": 0,
+		"NegY": 0,
+		"PosX": 0,
+		"PosY": 0
+	},
+	"1": {
+		"NegX": 1,
+		"NegY": 0,
+		"PosX": 0,
+		"PosY": 0
+	},
+	"2": {
+		"NegX": 0,
+		"NegY": 0,
+		"PosX": 1,
+		"PosY": 0
+	},
+	"3": {
+		"NegX": 1,
+		"NegY": 0,
+		"PosX": 1,
+		"PosY": 0
+	},
+	"4": {
+		"NegX": 0,
+		"NegY": 1,
+		"PosX": 0,
+		"PosY": 0
+	},
+	"5": {
+		"NegX": 1,
+		"NegY": 1,
+		"PosX": 0,
+		"PosY": 0
+	},
+	"6": {
+		"NegX": 0,
+		"NegY": 1,
+		"PosX": 1,
+		"PosY": 0
+	},
+	"7": {
+		"NegX": 1,
+		"NegY": 1,
+		"PosX": 1,
+		"PosY": 0
+	},
+	"8": {
+		"NegX": 0,
+		"NegY": 0,
+		"PosX": 0,
+		"PosY": 1
+	},
+	"9": {
+		"NegX": 1,
+		"NegY": 0,
+		"PosX": 0,
+		"PosY": 1
+	},
+	"10": {
+		"NegX": 0,
+		"NegY": 0,
+		"PosX": 1,
+		"PosY": 1
+	},
+	"11": {
+		"NegX": 1,
+		"NegY": 0,
+		"PosX": 1,
+		"PosY": 1
+	},
+	"12": {
+		"NegX": 0,
+		"NegY": 1,
+		"PosX": 0,
+		"PosY": 1
+	},
+	"13": {
+		"NegX": 1,
+		"NegY": 1,
+		"PosX": 0,
+		"PosY": 1
+	},
+	"14": {
+		"NegX": 0,
+		"NegY": 1,
+		"PosX": 1,
+		"PosY": 1
+	},
+	"15": {
+		"NegX": 1,
+		"NegY": 1,
+		"PosX": 1,
+		"PosY": 1
+	}
+}

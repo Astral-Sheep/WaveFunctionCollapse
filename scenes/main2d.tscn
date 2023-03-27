@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbh7vjybd5plh"]
+
+[ext_resource type="Script" path="res://scripts/2d/Main2D.cs" id="1_6502r"]
+[ext_resource type="Script" path="res://scripts/2d/InteractiveCamera2D.cs" id="2_10kkt"]
+
+[node name="Main2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("2_10kkt")
+
+[node name="Container" type="Node2D" parent="."]
+position = Vector2(30, 30)
+script = ExtResource("1_6502r")
+timeBetweenIterations = 0.005

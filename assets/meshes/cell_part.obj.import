@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dmrx54577d0js"
+path="res://.godot/imported/cell_part.obj-5890cee82162caa5686cd98af90adaab.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cell_part.obj-5890cee82162caa5686cd98af90adaab.mesh"]
+
+source_file="res://assets/meshes/cell_part.obj"
+dest_files=["res://.godot/imported/cell_part.obj-5890cee82162caa5686cd98af90adaab.mesh", "res://.godot/imported/cell_part.obj-5890cee82162caa5686cd98af90adaab.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

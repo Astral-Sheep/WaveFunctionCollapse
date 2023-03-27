@@ -1,0 +1,514 @@
+{
+	"0": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"1": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"2": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"3": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"4": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"5": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"6": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"7": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"8": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"9": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"10": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"11": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"12": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"13": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"14": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"15": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"16": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"17": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"18": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"19": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"20": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"21": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"22": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"23": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 0
+	},
+	"24": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"25": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"26": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"27": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"28": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"29": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"30": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"31": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 0
+	},
+	"32": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"33": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"34": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"35": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"36": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"37": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"38": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"39": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"40": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"41": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"42": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"43": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"44": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"45": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"46": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"47": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 0,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"48": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"49": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"50": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"51": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"52": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"53": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"54": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"55": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 0,
+		"PosZ": 1
+	},
+	"56": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"57": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"58": {
+		"NegX": 0,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"59": {
+		"NegX": 1,
+		"NegY": 0,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"60": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"61": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 0,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"62": {
+		"NegX": 0,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	},
+	"63": {
+		"NegX": 1,
+		"NegY": 1,
+		"NegZ": 1,
+		"PosX": 1,
+		"PosY": 1,
+		"PosZ": 1
+	}
+}
