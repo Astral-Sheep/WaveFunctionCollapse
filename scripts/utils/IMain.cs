@@ -16,7 +16,7 @@ namespace Com.Astral.WFC.Utils
 		/// </summary>
 		public void Generate();
 		/// <summary>
-		/// Render the collapsed patterns.
+		/// Render the given patterns.
 		/// </summary>
 		public void Render(List<T> pCellsToRender);
 		/// <summary>

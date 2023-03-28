@@ -38,7 +38,6 @@ namespace Com.Astral.WFC._3D
 					{
 						lPattern = new Pattern3D(Data3D.Patterns, new Vector3I(x, y, z));
 
-						// Apply constrain.
 						if (pInitConstrain)
 						{
 							if (x == 0)
@@ -153,6 +152,7 @@ namespace Com.Astral.WFC._3D
 				{
 					lNeighborCoords = lCurrentCoords + dir;
 
+					// Continue if the neighbor is already collapsed.
 					if (!uncollapsedCoordinates.Contains(lNeighborCoords))
 						continue;
 
