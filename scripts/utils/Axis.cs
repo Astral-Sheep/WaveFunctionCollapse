@@ -1,5 +1,8 @@
 ﻿namespace Com.Astral.WFC.Utils
 {
+	/// <summary>
+	/// The axis in 3 dimensions. (more dimensions can be added with a limit of 8 dimensions)
+	/// </summary>
 	public enum Axis : sbyte
 	{
 		None = 0,

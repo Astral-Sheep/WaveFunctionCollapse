@@ -4,6 +4,9 @@ using Godot;
 
 namespace Com.Astral.WFC._3D
 {
+	/// <summary>
+	/// Main class that calls the <see cref="WaveFunctionCollapse3D"/> algorithm.
+	/// </summary>
 	public partial class Main3D : Node3D, IMain
 	{
 		protected const float CELL_SIZE = 3f;
@@ -64,6 +67,7 @@ namespace Com.Astral.WFC._3D
 
 		public void Init()
 		{
+			// Return if already initialized.
 			if (cells != null)
 				return;
 
@@ -87,6 +91,7 @@ namespace Com.Astral.WFC._3D
 
 		public void Generate()
 		{
+			// Don't restart generation if generating.
 			if (generating)
 				return;
 

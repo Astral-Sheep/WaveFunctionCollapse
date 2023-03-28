@@ -5,14 +5,38 @@ using Mathf = Godot.Mathf;
 
 namespace Com.Astral.WFC._2D
 {
+	/// <summary>
+	/// Representation of a 2 dimensional vector of int.
+	/// </summary>
 	public struct Vector2I : IVectorI, IEquatable<Vector2I>
 	{
+		/// <summary>
+		/// Vector with all values set to 0: (0, 0).
+		/// </summary>
 		public static Vector2I Zero => _zero;
+		/// <summary>
+		/// Vector with all values set to 1: (1, 1). 
+		/// </summary>
 		public static Vector2I One => _one;
+		/// <summary>
+		/// Vector with all values set to -1: (-1, -1).
+		/// </summary>
 		public static Vector2I NegOne => _negOne;
+		/// <summary>
+		/// Vector corresponding to the right direction: (1, 0).
+		/// </summary>
 		public static Vector2I Right => _right;
+		/// <summary>
+		/// Vector corresponding to the left direction: (-1, 0).
+		/// </summary>
 		public static Vector2I Left => _left;
+		/// <summary>
+		/// Vector corresponding to the up direction: (0, -1).
+		/// </summary>
 		public static Vector2I Up => _up;
+		/// <summary>
+		/// Vector corresponding to the down direction: (0, 1).
+		/// </summary>
 		public static Vector2I Down => _down;
 
 		private static readonly Vector2I _zero = new Vector2I(0, 0);
@@ -30,12 +54,18 @@ namespace Com.Astral.WFC._2D
 			set => coordinates[index] = value;
 		}
 
+		/// <summary>
+		/// The coordinate on the X axis.
+		/// </summary>
 		public int X
 		{
 			readonly get => coordinates[0];
 			set => coordinates[0] = value;
 		}
 
+		/// <summary>
+		/// The coordinate on the Y axis.
+		/// </summary>
 		public int Y
 		{
 			readonly get => coordinates[1];
@@ -59,26 +89,41 @@ namespace Com.Astral.WFC._2D
 			coordinates = new int[2] { vector.X, vector.Y };
 		}
 
+		/// <summary>
+		/// Return the vector with all its values set to absolute values.
+		/// </summary>
 		public readonly Vector2I Abs()
 		{
 			return new Vector2I(Mathf.Abs(X), Mathf.Abs(Y));
 		}
 
+		/// <summary>
+		/// Clamp the vector between the given minimum vector and the maximum vector.
+		/// </summary>
 		public readonly Vector2I Clamp(Vector2I min, Vector2I max)
 		{
 			return new Vector2I(Mathf.Clamp(X, min.X, max.X), Mathf.Clamp(Y, min.Y, max.Y));
 		}
 
+		/// <summary>
+		/// Return the length of the vector. Use <see cref="LengthSquared"/> if you just need to compare lengths.
+		/// </summary>
 		public readonly float Length()
 		{
 			return Mathf.Sqrt(X * X + Y * Y);
 		}
 
+		/// <summary>
+		/// Return the length squared of the vector.
+		/// </summary>
 		public readonly int LengthSquared()
 		{
 			return X * X + Y * Y;
 		}
 
+		/// <summary>
+		/// Return a vector with its values set to the sign of this vector.
+		/// </summary>
 		public readonly Vector2I Sign()
 		{
 			return new Vector2I(Mathf.Sign(X), Mathf.Sign(Y));

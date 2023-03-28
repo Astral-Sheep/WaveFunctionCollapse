@@ -4,8 +4,17 @@ using System;
 
 namespace Com.Astral.WFC.Utils
 {
+	/// <summary>
+	/// Static class used to load patterns and neighbors ressources.
+	/// </summary>
 	public static class DataLoader
 	{
+		/// <summary>
+		/// Load the n-dimensional pattern data at the given path.
+		/// </summary>
+		/// <param name="pDimension">The pattern dimension (must be greater than 0).</param>
+		/// <param name="pPath">The path to the json file.</param>
+		/// <returns>A <see cref="Dictionary"/> containing all patterns.</returns>
 		public static Dictionary<int, Dictionary<Axis, int>> LoadPatterns(uint pDimension, string pPath)
 		{
 			Dictionary<int, Dictionary<Axis, int>> lPatterns;
@@ -74,6 +83,12 @@ namespace Com.Astral.WFC.Utils
 			return lPatterns;
 		}
 
+		/// <summary>
+		/// Load the neighbors' data at the given path.
+		/// </summary>
+		/// <param name="pPath">The path to the json file.</param>
+		/// <returns>A <see cref="Dictionary"/> containing the neighbors' data.</returns>
+		/// <exception cref="NullReferenceException"></exception>
 		public static Dictionary<int, Array<int>> LoadNeighbors(string pPath)
 		{
 			if (!ResourceLoader.Exists(pPath))
@@ -93,6 +108,10 @@ namespace Com.Astral.WFC.Utils
 			return lNeighbors;
 		}
 
+		/// <summary>
+		/// Returns the <see cref="Axis"/> corresponding to the given <see cref="IVectorI"/>.
+		/// </summary>
+		/// <returns>The corresponding <see cref="Axis"/></returns>
 		public static Axis GetAxisFromVector(IVectorI pVector)
 		{
 			for (int i = 0; i <= pVector.Size; i++)

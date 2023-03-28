@@ -17,5 +17,4 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 
 
 [node name="Container" type="Node3D" parent="."]
 script = ExtResource("1_fdgb2")
-limitBounds = true
 timeBetweenIterations = 0.005

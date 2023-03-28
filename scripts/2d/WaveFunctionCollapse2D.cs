@@ -1,16 +1,27 @@
-﻿using Com.Astral.WFC._3D;
-using Com.Astral.WFC.Utils;
+﻿using Com.Astral.WFC.Utils;
 using Godot;
 using System.Collections.Generic;
 using ArrayI = Godot.Collections.Array<int>;
 
 namespace Com.Astral.WFC._2D
 {
+	/// <summary>
+	/// Static class containing the 2 dimensional wave function collapse algorithm.
+	/// </summary>
 	public static class WaveFunctionCollapse2D
 	{
+		/// <summary>
+		/// The 2 dimensional array containing all patterns.
+		/// </summary>
 		public static Pattern2D[,] Patterns => _patterns.Clone() as Pattern2D[,];
 		private static Pattern2D[,] _patterns;
 
+		/// <summary>
+		/// Initialize the algorimth with the given size.
+		/// </summary>
+		/// <param name="pSizeX">The size on the x axis.</param>
+		/// <param name="pSizeY">The size on the y axis.</param>
+		/// <param name="pInitConstrain">Whether or not we apply a constrain before starting.</param>
 		public static void Init(uint pSizeX, uint pSizeY, bool pInitConstrain = false)
 		{
 			_patterns = new Pattern2D[pSizeX, pSizeY];
@@ -23,6 +34,7 @@ namespace Com.Astral.WFC._2D
 					lPattern = new Pattern2D(Data2D.Patterns, new Vector2I(x, y));
 					_patterns[x, y] = lPattern;
 
+					// Go to next iteration if no constrain.
 					if (!pInitConstrain)
 						continue;
 
@@ -47,6 +59,9 @@ namespace Com.Astral.WFC._2D
 			}
 		}
 
+		/// <summary>
+		/// Return whether or not all patterns are collapsed.
+		/// </summary>
 		public static bool IsCollapsed()
 		{
 			for (int x = 0; x < _patterns.GetLength(0); x++)
@@ -61,6 +76,9 @@ namespace Com.Astral.WFC._2D
 			return true;
 		}
 
+		/// <summary>
+		/// Collapse a cell and propagate its state.
+		/// </summary>
 		public static void Iterate()
 		{
 			Vector2I lCoordinates = GetMinEntropyCoordinates();
@@ -68,6 +86,11 @@ namespace Com.Astral.WFC._2D
 			Propagate(lCoordinates);
 		}
 
+		/// <summary>
+		/// Return the coordinates of the pattern with the minimum entropy.
+		/// If there are several patterns with the same entropy, it takes a random pattern among
+		/// the ones with the minimum entropy.
+		/// </summary>
 		private static Vector2I GetMinEntropyCoordinates()
 		{
 			int lMinEntropy = int.MaxValue;
@@ -101,6 +124,9 @@ namespace Com.Astral.WFC._2D
 			return lCoordinates[0];
 		}
 
+		/// <summary>
+		/// Propagate the state of the cell at the given coordinates.
+		/// </summary>
 		private static void Propagate(Vector2I pCoordinates)
 		{
 			Vector2I lCurrentCoords;
@@ -111,21 +137,26 @@ namespace Com.Astral.WFC._2D
 			Stack<Vector2I> lCoords = new Stack<Vector2I>();
 			lCoords.Push(pCoordinates);
 
+			// Loop while there is a constrained pattern in the stack.
 			while (lCoords.Count > 0)
 			{
 				lCurrentCoords = lCoords.Pop();
 
+				// Get the valid neighbors directions.
 				foreach (Vector2I dir in GetValidNeighbors(lCurrentCoords))
 				{
 					lNeighborCoords = lCurrentCoords + dir;
 					lNeighborPossibilities = _patterns[lNeighborCoords.X, lNeighborCoords.Y].Possibilities;
 					lPossibleNeighbors = _patterns[lCurrentCoords.X, lCurrentCoords.Y].GetPossibleNeighbors(dir);
 
+					// Go to next iteration if neighbor is already collapsed.
 					if (lNeighborPossibilities.Count <= 1)
 						continue;
 
+					// Constrain neighbor with remaining possibilities.
 					if (_patterns[lNeighborCoords.X, lNeighborCoords.Y].Constrain(dir, lPossibleNeighbors))
 					{
+						// Add to stack if not already in it.
 						if (!lCoords.Contains(lNeighborCoords))
 						{
 							lCoords.Push(lNeighborCoords);
@@ -135,6 +166,9 @@ namespace Com.Astral.WFC._2D
 			}
 		}
 
+		/// <summary>
+		/// Return the valid directions to get neighbors at the given coordinates.
+		/// </summary>
 		private static List<Vector2I> GetValidNeighbors(Vector2I pCoordinates)
 		{
 			List<Vector2I> lNeighbors = new List<Vector2I>();

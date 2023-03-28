@@ -6,6 +6,9 @@ using Vector2I = Com.Astral.WFC._2D.Vector2I;
 
 namespace Com.Astral.WFC.Rendering
 {
+	/// <summary>
+	/// A <see cref="Pattern2D"/> renderer.
+	/// </summary>
 	public partial class Cell2D : Node2D, ICell<Pattern2D, Vector2I>
 	{
 		protected const string TEXTURE_PATH = "res://assets/sprites/cell_part.png";
@@ -14,6 +17,7 @@ namespace Com.Astral.WFC.Rendering
 
 		public void Render(Pattern2D pPattern)
 		{
+			// Return if already renderer or given an undefined pattern.
 			if (sprites != null || pPattern.Entropy > 0)
 				return;
 
@@ -22,17 +26,20 @@ namespace Com.Astral.WFC.Rendering
 
 			for (sbyte i = 0; i < 2; i++)
 			{
+				// Render positive axis.
 				if (Data2D.GetStateOnAxis(lState, (Axis)(1 << i)) > 0)
 				{
 					CreateSprite(new Vector2(i == 0 ? 1 : 0, i == 1 ? 1 : 0));
 				}
 
+				// Render negative axis.
 				if (Data2D.GetStateOnAxis(lState, (Axis)~(1 << i)) > 0)
 				{
 					CreateSprite(new Vector2(i == 0 ? -1 : 0, i == 1 ? -1 : 0));
 				}
 			}
 
+			// Render mid if at least 1 side is rendered.
 			if (sprites.Count > 0)
 			{
 				CreateSprite(Vector2.Zero);
@@ -41,6 +48,7 @@ namespace Com.Astral.WFC.Rendering
 
 		public void Reset()
 		{
+			// Return if not rendered.
 			if (sprites == null)
 				return;
 
@@ -53,6 +61,9 @@ namespace Com.Astral.WFC.Rendering
 			sprites = null;
 		}
 
+		/// <summary>
+		/// Instantiate, initialize and store a sprite.
+		/// </summary>
 		protected void CreateSprite(Vector2 pPosition)
 		{
 			Sprite2D lSprite = new Sprite2D

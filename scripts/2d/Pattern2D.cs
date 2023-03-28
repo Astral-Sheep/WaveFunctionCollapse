@@ -1,11 +1,13 @@
-﻿using Com.Astral.WFC._3D;
-using Com.Astral.WFC.Utils;
+﻿using Com.Astral.WFC.Utils;
 using Godot;
 using Godot.Collections;
 using System.Collections.Generic;
 
 namespace Com.Astral.WFC._2D
 {
+	/// <summary>
+	/// Representation of a 2 dimensional pattern.
+	/// </summary>
 	public struct Pattern2D : IPattern<Vector2I>
 	{
 		public int Entropy => _possibilities.Count - 1;
@@ -23,14 +25,17 @@ namespace Com.Astral.WFC._2D
 
 		public void Collapse()
 		{
+			// Return if already collapsed.
 			if (_possibilities.Count <= 1)
 				return;
 
+			// Choose random state.
 			_possibilities = new Array<int>() { _possibilities[Mathf.FloorToInt(GD.Randf() * _possibilities.Count)] };
 		}
 
 		public bool Constrain(Vector2I pDirection, Array<int> pPossibleNeighbors)
 		{
+			// Can't be constrained if already collapsed.
 			if (Entropy == 0)
 				return false;
 
@@ -69,16 +74,21 @@ namespace Com.Astral.WFC._2D
 
 		public int GetState()
 		{
+			// Return -1 if not collapsed.
 			if (_possibilities.Count > 1)
 				return -1;
 
 			return _possibilities[0];
 		}
 
+		/// <summary>
+		/// Set an initial constrain on the given <see cref="Axis"/>, as if there were an empty cell on it.
+		/// </summary>
 		public void InitConstrain(Axis pAxis)
 		{
 			List<int> lPossibleNeighbors = new List<int>();
 
+			// Need this to use method Contains, because godot array seems to be broken just in this method.
 			foreach (int possibility in Data2D.GetNeighborsOnAxis(0, pAxis))
 			{
 				lPossibleNeighbors.Add(possibility);
