@@ -24,6 +24,8 @@ namespace Com.Astral.WFC._2D
 
 		public override void _Ready()
 		{
+			Position = new Vector2((1f - sizeX) / 2f, (1f - sizeY) / 2f) * CELL_SIZE;
+
 			GD.Randomize();
 			Data2D.Load();
 			Init();

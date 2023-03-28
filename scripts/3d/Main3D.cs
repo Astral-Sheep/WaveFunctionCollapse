@@ -25,6 +25,8 @@ namespace Com.Astral.WFC._3D
 
 		public override void _Ready()
 		{
+			Position = new Vector3((1f - sizeX) / 2f, (1f - sizeY) / 2f, (1f - sizeZ) / 2f) * CELL_SIZE;
+
 			GD.Randomize();
 			Data3D.Load();
 			Init();

@@ -36,7 +36,7 @@ namespace Com.Astral.WFC._2D
 		{
 			if (pEvent is InputEventKey pKeyEvent && pKeyEvent.Keycode == resetKey && pKeyEvent.Pressed)
 			{
-				Position = DisplayServer.WindowGetSize() / 2;
+				Position = Vector2.Zero;
 			}
 
 			base._UnhandledKeyInput(pEvent);
