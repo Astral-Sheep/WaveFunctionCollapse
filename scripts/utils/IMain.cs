@@ -1,9 +1,11 @@
-﻿namespace Com.Astral.WFC.Utils
+﻿using System.Collections.Generic;
+
+namespace Com.Astral.WFC.Utils
 {
 	/// <summary>
 	/// Interface used on scripts that call the wave function collapse algorithm.
 	/// </summary>
-	public interface IMain
+	public interface IMain<T> where T : IVectorI
 	{
 		/// <summary>
 		/// Initialize the cells array.
@@ -16,7 +18,7 @@
 		/// <summary>
 		/// Render the collapsed patterns.
 		/// </summary>
-		public void Render();
+		public void Render(List<T> pCellsToRender);
 		/// <summary>
 		/// Reset all the cells.
 		/// </summary>

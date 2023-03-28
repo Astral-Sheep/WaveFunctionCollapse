@@ -1,13 +1,14 @@
 using Com.Astral.WFC.Rendering;
 using Com.Astral.WFC.Utils;
 using Godot;
+using System.Collections.Generic;
 
 namespace Com.Astral.WFC._2D
 {
 	/// <summary>
 	/// Main class that calls the <see cref="WaveFunctionCollapse2D"/> algorithm.
 	/// </summary>
-	public partial class Main2D : Node2D, IMain
+	public partial class Main2D : Node2D, IMain<Vector2I>
 	{
 		protected const float CELL_SIZE = 60f;
 
@@ -43,14 +44,12 @@ namespace Com.Astral.WFC._2D
 
 				if (!WaveFunctionCollapse2D.IsCollapsed())
 				{
-					WaveFunctionCollapse2D.Iterate();
+					Render(WaveFunctionCollapse2D.Iterate());
 				}
 				else
 				{
 					generating = false;
 				}
-
-				Render();
 			}
 		}
 
@@ -97,14 +96,11 @@ namespace Com.Astral.WFC._2D
 			generating = true;
 		}
 
-		public void Render()
+		public void Render(List<Vector2I> pCellsToRender)
 		{
-			for (int x = 0; x < sizeX; x++)
+			foreach (Vector2I coordinates in pCellsToRender)
 			{
-				for (int y = 0; y < sizeY; y++)
-				{
-					cells[x, y].Render(WaveFunctionCollapse2D.Patterns[x, y]);
-				}
+				cells[coordinates.X, coordinates.Y].Render(WaveFunctionCollapse2D.Patterns[coordinates.X, coordinates.Y]);
 			}
 		}
 

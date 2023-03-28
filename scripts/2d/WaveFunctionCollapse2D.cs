@@ -79,11 +79,11 @@ namespace Com.Astral.WFC._2D
 		/// <summary>
 		/// Collapse a cell and propagate its state.
 		/// </summary>
-		public static void Iterate()
+		public static List<Vector2I> Iterate()
 		{
 			Vector2I lCoordinates = GetMinEntropyCoordinates();
 			_patterns[lCoordinates.X, lCoordinates.Y].Collapse();
-			Propagate(lCoordinates);
+			return Propagate(lCoordinates);
 		}
 
 		/// <summary>
@@ -127,12 +127,13 @@ namespace Com.Astral.WFC._2D
 		/// <summary>
 		/// Propagate the state of the cell at the given coordinates.
 		/// </summary>
-		private static void Propagate(Vector2I pCoordinates)
+		private static List<Vector2I> Propagate(Vector2I pCoordinates)
 		{
 			Vector2I lCurrentCoords;
 			Vector2I lNeighborCoords;
 			ArrayI lNeighborPossibilities;
 			ArrayI lPossibleNeighbors;
+			List<Vector2I> lCollapsedPatterns = new List<Vector2I>() { pCoordinates };
 
 			Stack<Vector2I> lCoords = new Stack<Vector2I>();
 			lCoords.Push(pCoordinates);
@@ -161,9 +162,17 @@ namespace Com.Astral.WFC._2D
 						{
 							lCoords.Push(lNeighborCoords);
 						}
+
+						// Add to collapsed list if not already in it.
+						if (!lCollapsedPatterns.Contains(lNeighborCoords) && _patterns[lNeighborCoords.X, lNeighborCoords.Y].Entropy == 0)
+						{
+							lCollapsedPatterns.Add(lNeighborCoords);
+						}
 					}
 				}
 			}
+
+			return lCollapsedPatterns;
 		}
 
 		/// <summary>

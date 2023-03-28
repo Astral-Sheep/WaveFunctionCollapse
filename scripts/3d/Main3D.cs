@@ -1,13 +1,14 @@
 using Com.Astral.WFC.Rendering;
 using Com.Astral.WFC.Utils;
 using Godot;
+using System.Collections.Generic;
 
 namespace Com.Astral.WFC._3D
 {
 	/// <summary>
 	/// Main class that calls the <see cref="WaveFunctionCollapse3D"/> algorithm.
 	/// </summary>
-	public partial class Main3D : Node3D, IMain
+	public partial class Main3D : Node3D, IMain<Vector3I>
 	{
 		protected const float CELL_SIZE = 3f;
 
@@ -44,14 +45,12 @@ namespace Com.Astral.WFC._3D
 
 				if (!WaveFunctionCollapse3D.IsCollapsed())
 				{
-					WaveFunctionCollapse3D.Iterate();
+					Render(WaveFunctionCollapse3D.Iterate());
 				}
 				else
 				{
 					generating = false;
 				}
-
-				Render();
 			}
 		}
 
@@ -101,17 +100,11 @@ namespace Com.Astral.WFC._3D
 			generating = true;
 		}
 
-		public void Render()
+		public void Render(List<Vector3I> pCellsToRender)
 		{
-			for (int x = 0; x < sizeX; x++)
+			foreach (Vector3I coordinates in pCellsToRender)
 			{
-				for (int y = 0; y < sizeY; y++)
-				{
-					for (int z = 0; z < sizeZ; z++)
-					{
-						cells[x, y, z].Render(WaveFunctionCollapse3D.Patterns[x, y, z]);
-					}
-				}
+				cells[coordinates.X, coordinates.Y, coordinates.Z].Render(WaveFunctionCollapse3D.Patterns[coordinates.X, coordinates.Y, coordinates.Z]);
 			}
 		}
 
