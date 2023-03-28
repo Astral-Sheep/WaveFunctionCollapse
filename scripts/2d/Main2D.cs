@@ -26,7 +26,6 @@ namespace Com.Astral.WFC._2D
 		{
 			GD.Randomize();
 			Data2D.Load();
-			WaveFunctionCollapse2D.Init(sizeX, sizeY, limitBounds);
 			Init();
 			Generate();
 		}

@@ -15,6 +15,7 @@ namespace Com.Astral.WFC._2D
 		/// </summary>
 		public static Pattern2D[,] Patterns => _patterns.Clone() as Pattern2D[,];
 		private static Pattern2D[,] _patterns;
+		private static List<Vector2I> uncollapsedCoordinates;
 
 		/// <summary>
 		/// Initialize the algorimth with the given size.
@@ -26,35 +27,38 @@ namespace Com.Astral.WFC._2D
 		{
 			_patterns = new Pattern2D[pSizeX, pSizeY];
 			Pattern2D lPattern;
+			uncollapsedCoordinates = new List<Vector2I>();
 
 			for (int x = 0; x < pSizeX; x++)
 			{
 				for (int y = 0; y < pSizeY; y++)
 				{
 					lPattern = new Pattern2D(Data2D.Patterns, new Vector2I(x, y));
+
+					// Apply constrain.
+					if (pInitConstrain)
+					{
+						if (x == 0)
+						{
+							lPattern.InitConstrain(Axis.PosX);
+						}
+						else if (x == pSizeX - 1)
+						{
+							lPattern.InitConstrain(Axis.NegX);
+						}
+
+						if (y == 0)
+						{
+							lPattern.InitConstrain(Axis.PosY);
+						}
+						else if (y == pSizeY - 1)
+						{
+							lPattern.InitConstrain(Axis.NegY);
+						}
+					}
+
 					_patterns[x, y] = lPattern;
-
-					// Go to next iteration if no constrain.
-					if (!pInitConstrain)
-						continue;
-
-					if (x == 0)
-					{
-						lPattern.InitConstrain(Axis.PosX);
-					}
-					else if (x == pSizeX - 1)
-					{
-						lPattern.InitConstrain(Axis.NegX);
-					}
-
-					if (y == 0)
-					{
-						lPattern.InitConstrain(Axis.PosY);
-					}
-					else if (y == pSizeY - 1)
-					{
-						lPattern.InitConstrain(Axis.NegY);
-					}
+					uncollapsedCoordinates.Add(new Vector2I(x, y));
 				}
 			}
 		}
@@ -64,16 +68,7 @@ namespace Com.Astral.WFC._2D
 		/// </summary>
 		public static bool IsCollapsed()
 		{
-			for (int x = 0; x < _patterns.GetLength(0); x++)
-			{
-				for (int y = 0; y < _patterns.GetLength(1); y++)
-				{
-					if (_patterns[x, y].Entropy > 0)
-						return false;
-				}
-			}
-
-			return true;
+			return uncollapsedCoordinates.Count == 0;
 		}
 
 		/// <summary>
@@ -97,22 +92,19 @@ namespace Com.Astral.WFC._2D
 			List<Vector2I> lCoordinates = new List<Vector2I>();
 			Pattern2D lPattern;
 
-			for (int x = 0; x < _patterns.GetLength(0); x++)
+			foreach (Vector2I coordinates in uncollapsedCoordinates)
 			{
-				for (int y = 0; y < _patterns.GetLength(1); y++)
+				lPattern = _patterns[coordinates.X, coordinates.Y];
+
+				if (lPattern.Entropy <= lMinEntropy)
 				{
-					lPattern = _patterns[x, y];
-
-					if (lPattern.Entropy > 0 && lPattern.Entropy <= lMinEntropy)
+					if (lPattern.Entropy < lMinEntropy)
 					{
-						if (lPattern.Entropy < lMinEntropy)
-						{
-							lMinEntropy = lPattern.Entropy;
-							lCoordinates.Clear();
-						}
-
-						lCoordinates.Add(lPattern.Coordinates);
+						lMinEntropy = lPattern.Entropy;
+						lCoordinates.Clear();
 					}
+
+					lCoordinates.Add(coordinates);
 				}
 			}
 
@@ -131,12 +123,12 @@ namespace Com.Astral.WFC._2D
 		{
 			Vector2I lCurrentCoords;
 			Vector2I lNeighborCoords;
-			ArrayI lNeighborPossibilities;
 			ArrayI lPossibleNeighbors;
 			List<Vector2I> lCollapsedPatterns = new List<Vector2I>() { pCoordinates };
 
 			Stack<Vector2I> lCoords = new Stack<Vector2I>();
 			lCoords.Push(pCoordinates);
+			uncollapsedCoordinates.Remove(pCoordinates);
 
 			// Loop while there is a constrained pattern in the stack.
 			while (lCoords.Count > 0)
@@ -147,12 +139,11 @@ namespace Com.Astral.WFC._2D
 				foreach (Vector2I dir in GetValidNeighbors(lCurrentCoords))
 				{
 					lNeighborCoords = lCurrentCoords + dir;
-					lNeighborPossibilities = _patterns[lNeighborCoords.X, lNeighborCoords.Y].Possibilities;
-					lPossibleNeighbors = _patterns[lCurrentCoords.X, lCurrentCoords.Y].GetPossibleNeighbors(dir);
 
-					// Go to next iteration if neighbor is already collapsed.
-					if (lNeighborPossibilities.Count <= 1)
+					if (!uncollapsedCoordinates.Contains(lNeighborCoords))
 						continue;
+
+					lPossibleNeighbors = _patterns[lCurrentCoords.X, lCurrentCoords.Y].GetPossibleNeighbors(dir);
 
 					// Constrain neighbor with remaining possibilities.
 					if (_patterns[lNeighborCoords.X, lNeighborCoords.Y].Constrain(dir, lPossibleNeighbors))
@@ -163,9 +154,10 @@ namespace Com.Astral.WFC._2D
 							lCoords.Push(lNeighborCoords);
 						}
 
-						// Add to collapsed list if not already in it.
-						if (!lCollapsedPatterns.Contains(lNeighborCoords) && _patterns[lNeighborCoords.X, lNeighborCoords.Y].Entropy == 0)
+						// Remove of uncollapsed list if collapsed with constrain.
+						if (uncollapsedCoordinates.Contains(lNeighborCoords) && _patterns[lNeighborCoords.X, lNeighborCoords.Y].Entropy == 0)
 						{
+							uncollapsedCoordinates.Remove(lNeighborCoords);
 							lCollapsedPatterns.Add(lNeighborCoords);
 						}
 					}

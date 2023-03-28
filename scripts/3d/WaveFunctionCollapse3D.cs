@@ -15,6 +15,7 @@ namespace Com.Astral.WFC._3D
 		/// </summary>
 		public static Pattern3D[,,] Patterns => _patterns.Clone() as Pattern3D[,,];
 		private static Pattern3D[,,] _patterns;
+		private static List<Vector3I> uncollapsedCoordinates;
 
 		/// <summary>
 		/// Initialize the algorimth with the given size.
@@ -27,6 +28,7 @@ namespace Com.Astral.WFC._3D
 		{
 			_patterns = new Pattern3D[pSizeX, pSizeY, pSizeZ];
 			Pattern3D lPattern;
+			uncollapsedCoordinates = new List<Vector3I>();
 
 			for (int x = 0; x < pSizeX; x++)
 			{
@@ -35,38 +37,40 @@ namespace Com.Astral.WFC._3D
 					for (int z = 0; z < pSizeZ; z++)
 					{
 						lPattern = new Pattern3D(Data3D.Patterns, new Vector3I(x, y, z));
+
+						// Apply constrain.
+						if (pInitConstrain)
+						{
+							if (x == 0)
+							{
+								lPattern.InitConstrain(Axis.PosX);
+							}
+							else if (x == pSizeX - 1)
+							{
+								lPattern.InitConstrain(Axis.NegX);
+							}
+
+							if (y == 0)
+							{
+								lPattern.InitConstrain(Axis.PosY);
+							}
+							else if (y == pSizeY - 1)
+							{
+								lPattern.InitConstrain(Axis.NegY);
+							}
+
+							if (z == 0)
+							{
+								lPattern.InitConstrain(Axis.PosZ);
+							}
+							else if (z == pSizeZ - 1)
+							{
+								lPattern.InitConstrain(Axis.NegZ);
+							}
+						}
+
 						_patterns[x, y, z] = lPattern;
-
-						// Go to next iteration if no constrain.
-						if (!pInitConstrain)
-							continue;
-
-						if (x == 0)
-						{
-							lPattern.InitConstrain(Axis.PosX);
-						}
-						else if (x == pSizeX - 1)
-						{
-							lPattern.InitConstrain(Axis.NegX);
-						}
-
-						if (y == 0)
-						{
-							lPattern.InitConstrain(Axis.PosY);
-						}
-						else if (y == pSizeY - 1)
-						{
-							lPattern.InitConstrain(Axis.NegY);
-						}
-
-						if (z == 0)
-						{
-							lPattern.InitConstrain(Axis.PosZ);
-						}
-						else if (z == pSizeZ - 1)
-						{
-							lPattern.InitConstrain(Axis.NegZ);
-						}
+						uncollapsedCoordinates.Add(new Vector3I(x, y, z));
 					}
 				}
 			}
@@ -77,19 +81,7 @@ namespace Com.Astral.WFC._3D
 		/// </summary>
 		public static bool IsCollapsed()
 		{
-			for (int x = 0; x < _patterns.GetLength(0); x++)
-			{
-				for (int y = 0; y < _patterns.GetLength(1); y++)
-				{
-					for (int z = 0; z < _patterns.GetLength(2); z++)
-					{
-						if (_patterns[x, y, z].Entropy > 0)
-							return false;
-					}
-				}
-			}
-
-			return true;
+			return uncollapsedCoordinates.Count == 0;
 		}
 
 		/// <summary>
@@ -113,25 +105,19 @@ namespace Com.Astral.WFC._3D
 			List<Vector3I> lCoordinates = new List<Vector3I>();
 			Pattern3D lPattern;
 
-			for (int x = 0; x < _patterns.GetLength(0); x++)
+			foreach (Vector3I coordinates in uncollapsedCoordinates)
 			{
-				for (int y = 0; y < _patterns.GetLength(1); y++)
+				lPattern = _patterns[coordinates.X, coordinates.Y, coordinates.Z];
+
+				if (lPattern.Entropy <= lMinEntropy)
 				{
-					for (int z = 0; z < _patterns.GetLength(2); z++)
+					if (lPattern.Entropy < lMinEntropy)
 					{
-						lPattern = _patterns[x, y, z];
-
-						if (lPattern.Entropy > 0 && lPattern.Entropy <= lMinEntropy)
-						{
-							if (lPattern.Entropy < lMinEntropy)
-							{
-								lMinEntropy = lPattern.Entropy;
-								lCoordinates.Clear();
-							}
-
-							lCoordinates.Add(lPattern.Coordinates);
-						}
+						lMinEntropy = lPattern.Entropy;
+						lCoordinates.Clear();
 					}
+
+					lCoordinates.Add(coordinates);
 				}
 			}
 
@@ -150,12 +136,12 @@ namespace Com.Astral.WFC._3D
 		{
 			Vector3I lCurrentCoords;
 			Vector3I lNeighborCoords;
-			ArrayI lNeighborPossibilities;
 			ArrayI lPossibleNeighbors;
 			List<Vector3I> lCollapsedPatterns = new List<Vector3I>() { pCoordinates };
 
 			Stack<Vector3I> lCoords = new Stack<Vector3I>();
 			lCoords.Push(pCoordinates);
+			uncollapsedCoordinates.Remove(pCoordinates);
 
 			// Loop while there is a constrained pattern in the stack.
 			while (lCoords.Count > 0)
@@ -166,12 +152,11 @@ namespace Com.Astral.WFC._3D
 				foreach (Vector3I dir in GetValidNeighbors(lCurrentCoords))
 				{
 					lNeighborCoords = lCurrentCoords + dir;
-					lNeighborPossibilities = _patterns[lNeighborCoords.X, lNeighborCoords.Y, lNeighborCoords.Z].Possibilities;
-					lPossibleNeighbors = _patterns[lCurrentCoords.X, lCurrentCoords.Y, lCurrentCoords.Z].GetPossibleNeighbors(dir);
 
-					// Go to next iteration if neighbor is already collapsed.
-					if (lNeighborPossibilities.Count <= 1)
+					if (!uncollapsedCoordinates.Contains(lNeighborCoords))
 						continue;
+
+					lPossibleNeighbors = _patterns[lCurrentCoords.X, lCurrentCoords.Y, lCurrentCoords.Z].GetPossibleNeighbors(dir);
 
 					// Constrain neighbor with remaining possibilities.
 					if (_patterns[lNeighborCoords.X, lNeighborCoords.Y, lNeighborCoords.Z].Constrain(dir, lPossibleNeighbors))
@@ -182,9 +167,10 @@ namespace Com.Astral.WFC._3D
 							lCoords.Push(lNeighborCoords);
 						}
 
-						// Add to collapsed list if not already in it.
-						if (!lCollapsedPatterns.Contains(lNeighborCoords) && _patterns[lNeighborCoords.X, lNeighborCoords.Y, lNeighborCoords.Z].Entropy == 0)
+						// Remove of uncollapsed list if collapsed with constrain.
+						if (uncollapsedCoordinates.Contains(lNeighborCoords) && _patterns[lNeighborCoords.X, lNeighborCoords.Y, lNeighborCoords.Z].Entropy == 0)
 						{
+							uncollapsedCoordinates.Remove(lNeighborCoords);
 							lCollapsedPatterns.Add(lNeighborCoords);
 						}
 					}

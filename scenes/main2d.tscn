@@ -13,7 +13,6 @@ zoomSpeed = 0.1
 [node name="Container" type="Node2D" parent="."]
 position = Vector2(30, 30)
 script = ExtResource("1_6502r")
-limitBounds = true
 timeBetweenIterations = 0.001
 sizeX = 100
 sizeY = 100

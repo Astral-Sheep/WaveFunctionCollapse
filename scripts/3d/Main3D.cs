@@ -27,7 +27,6 @@ namespace Com.Astral.WFC._3D
 		{
 			GD.Randomize();
 			Data3D.Load();
-			WaveFunctionCollapse3D.Init(sizeX, sizeY, sizeZ, limitBounds);
 			Init();
 			Generate();
 		}
@@ -95,7 +94,7 @@ namespace Com.Astral.WFC._3D
 				return;
 
 			Reset();
-			WaveFunctionCollapse3D.Init(sizeX, sizeY, sizeZ);
+			WaveFunctionCollapse3D.Init(sizeX, sizeY, sizeZ, limitBounds);
 			timer = 0f;
 			generating = true;
 		}

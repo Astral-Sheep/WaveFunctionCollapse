@@ -88,7 +88,7 @@ namespace Com.Astral.WFC._2D
 		{
 			List<int> lPossibleNeighbors = new List<int>();
 
-			// Need this to use method Contains, because godot array seems to be broken just in this method.
+			// Need this to use method Contains because godot array seems to be broken, but only here.
 			foreach (int possibility in Data2D.GetNeighborsOnAxis(0, pAxis))
 			{
 				lPossibleNeighbors.Add(possibility);
