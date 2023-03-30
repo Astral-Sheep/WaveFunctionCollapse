@@ -18,13 +18,13 @@ namespace Com.Astral.WFC._2D
 		[ExportGroup("Size")]
 		[Export] protected uint sizeX = 10u;
 		[Export] protected uint sizeY = 10u;
-		protected bool generating = false;
 		protected double timer = 0d;
 		protected Cell2D[,] cells;
 
 		public override void _Ready()
 		{
 			Position = new Vector2((1f - sizeX) / 2f, (1f - sizeY) / 2f) * CELL_SIZE;
+			SetProcess(false);
 
 			GD.Randomize();
 			Data2D.Load();
@@ -34,9 +34,6 @@ namespace Com.Astral.WFC._2D
 
 		public override void _Process(double pDelta)
 		{
-			if (!generating)
-				return;
-
 			timer += pDelta;
 
 			if (timer >= timeBetweenIterations)
@@ -49,7 +46,7 @@ namespace Com.Astral.WFC._2D
 				}
 				else
 				{
-					generating = false;
+					SetProcess(false);
 				}
 			}
 		}
@@ -87,14 +84,14 @@ namespace Com.Astral.WFC._2D
 
 		public void Generate()
 		{
-			// Don't restart generation if generating.
-			if (generating)
+			// Don't restart generation if processing.
+			if (IsProcessing())
 				return;
 
 			Reset();
 			WaveFunctionCollapse2D.Init(sizeX, sizeY, limitBounds);
 			timer = 0d;
-			generating = true;
+			SetProcess(true);
 		}
 
 		public void Render(List<Vector2I> pCellsToRender)

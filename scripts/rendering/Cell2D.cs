@@ -13,7 +13,15 @@ namespace Com.Astral.WFC.Rendering
 	{
 		protected const string TEXTURE_PATH = "res://assets/sprites/cell_part.png";
 		protected const float TEXTURE_SIZE = 20f;
+
+		protected static Texture2D texture;
+
 		protected List<Sprite2D> sprites;
+
+		static Cell2D()
+		{
+			texture = GD.Load<Texture2D>(TEXTURE_PATH);
+		}
 
 		public void Render(Pattern2D pPattern)
 		{
@@ -68,7 +76,7 @@ namespace Com.Astral.WFC.Rendering
 		{
 			Sprite2D lSprite = new Sprite2D
 			{
-				Texture = GD.Load<Texture2D>(TEXTURE_PATH)
+				Texture = texture.Duplicate() as Texture2D
 			};
 
 			AddChild(lSprite);

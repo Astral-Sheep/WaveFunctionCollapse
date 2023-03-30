@@ -13,7 +13,15 @@ namespace Com.Astral.WFC.Rendering
 	{
 		protected const string MESH_PATH = "res://assets/meshes/cell_part.obj";
 		protected const float MESH_SIZE = 1f;
+
+		protected static Mesh mesh;
+
 		protected List<MeshInstance3D> meshes;
+
+		static Cell3D()
+		{
+			mesh = GD.Load<Mesh>(MESH_PATH);
+		}
 
 		public void Render(Pattern3D pPattern)
 		{
@@ -68,7 +76,7 @@ namespace Com.Astral.WFC.Rendering
 		{
 			MeshInstance3D lMesh = new MeshInstance3D()
 			{
-				Mesh = GD.Load<Mesh>(MESH_PATH)
+				Mesh = mesh.Duplicate() as Mesh,
 			};
 
 			AddChild(lMesh);

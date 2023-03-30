@@ -19,13 +19,13 @@ namespace Com.Astral.WFC._3D
 		[Export] protected uint sizeX = 10u;
 		[Export] protected uint sizeY = 10u;
 		[Export] protected uint sizeZ = 10u;
-		protected bool generating = false;
 		protected double timer = 0f;
 		protected Cell3D[,,] cells;
 
 		public override void _Ready()
 		{
 			Position = new Vector3((1f - sizeX) / 2f, (1f - sizeY) / 2f, (1f - sizeZ) / 2f) * CELL_SIZE;
+			SetProcess(false);
 
 			GD.Randomize();
 			Data3D.Load();
@@ -35,9 +35,6 @@ namespace Com.Astral.WFC._3D
 
 		public override void _Process(double pDelta)
 		{
-			if (!generating)
-				return;
-
 			timer += pDelta;
 
 			if (timer >= timeBetweenIterations)
@@ -50,7 +47,7 @@ namespace Com.Astral.WFC._3D
 				}
 				else
 				{
-					generating = false;
+					SetProcess(false);
 				}
 			}
 		}
@@ -91,14 +88,14 @@ namespace Com.Astral.WFC._3D
 
 		public void Generate()
 		{
-			// Don't restart generation if generating.
-			if (generating)
+			// Don't restart generation if processing.
+			if (IsProcessing())
 				return;
 
 			Reset();
 			WaveFunctionCollapse3D.Init(sizeX, sizeY, sizeZ, limitBounds);
 			timer = 0f;
-			generating = true;
+			SetProcess(true);
 		}
 
 		public void Render(List<Vector3I> pCellsToRender)
